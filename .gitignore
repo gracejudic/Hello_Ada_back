@@ -35,3 +35,13 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Env Files ###
+.env
+application-local.properties
+
+### Logs ###
+*.log
+
+### Mac OS ###
+.DS_Store
