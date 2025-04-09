@@ -1,17 +1,20 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+package com.back.hello_ada_back.Models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import jakarta.persistence.*;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-
 @Table(name = "users")
-
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,27 +30,30 @@ public class Users {
     @Column(nullable = true, name = "description", length = 255)
     private String description;
 
-    @Column(nullable = false, name = "email", length = 255)
+    @NotBlank(message = "L'email est obligatoire")
+    @Email(message = "Format d'email invalide")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(nullable = false, name = "password", length = 255)
+    @NotBlank(message = "Le mot de passe est obligatoire")
+    @Column(name = "password", nullable = false)
     private String password;
   
     
-@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+@OneToMany(mappedBy = "user")
+@JsonIgnoreProperties({"user"})
 private List<Posts> posts;
 
 public Users(){
 
 }
 
-public Users(Long id, String username, String profilPicture, String description, String email, String password){
-this.id = id;
-this.username = username;
-this.profilPicture = profilPicture;
-this.description = description;
-this.email = email;
-this.password = password;
+public Users(String username, String profilPicture, String description, String email, String password) {
+    this.username = username;
+    this.profilPicture = profilPicture;
+    this.description = description;
+    this.email = email;
+    this.password = password;
 }
 
     // getters and setters
@@ -91,5 +97,23 @@ this.password = password;
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Posts> getPosts() {
+        return this.posts;
+    }
+
+    public void setPosts(List<Posts> posts) {
+        this.posts = posts;
+    }
+
+}
 
    

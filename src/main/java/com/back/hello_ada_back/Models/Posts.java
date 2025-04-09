@@ -1,26 +1,27 @@
+package com.back.hello_ada_back.Models;
+import com.back.hello_ada_back.Models.Users;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import java.util.List;
+
 
 @Entity
-
 @Table(name = "posts")
-
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "user_id")
-    private Long userId;
 
     @Column(nullable = false, name = "likes")
     private BigInteger likes;
@@ -35,47 +36,33 @@ public class Posts {
     private String content;
 
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    public Posts(){
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"posts"})
+    private Users user;
 
-    }
+    public Posts() {}
 
-    public Posts(Long id, Long userId, BigInteger likes, String postTitle, String postPicture, Text content, DateTime createdAt){
+    public Posts(Long id, Users user, BigInteger likes, String postTitle, 
+                String postPicture, String content, LocalDateTime createdAt) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.likes = likes;
         this.postTitle = postTitle;
         this.postPicture = postPicture;
         this.content = content;
         this.createdAt = createdAt;
     }
-    
-@ManyToOne
-@JoinColumn(name = "user_id",
- nullable = false,
- foreignKey = @ForeignKey(name = "user_id"))
- private Users user;
-
-    // getters and setters
 
     public Long getId() {
         return this.id;
-
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public BigInteger getLikes() {
@@ -102,20 +89,27 @@ public class Posts {
         this.postPicture = postPicture;
     }
 
-    public Text getContent() {
+    public String getContent() {
         return this.content;
-
     }
 
-    public void setContent(Text content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public DateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Users getUser() {
+        return this.user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }
