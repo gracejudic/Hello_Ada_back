@@ -1,5 +1,4 @@
 package com.back.hello_ada_back.Models;
-import com.back.hello_ada_back.Models.Users;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -13,7 +12,7 @@ import jakarta.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
-import java.util.List;
+
 
 
 @Entity
