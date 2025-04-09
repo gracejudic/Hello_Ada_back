@@ -1,16 +1,11 @@
+package com.back.hello_ada_back.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
-
+import java.math.BigInteger;
+import java.util.Date;
+import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
 
 @Entity
-
 @Table(name = "posts")
 
 public class Posts {
@@ -23,7 +18,7 @@ public class Posts {
     private Long userId;
 
     @Column(nullable = false, name = "likes")
-    private BigInteger likes;
+    private int likes;
 
     @Column(nullable = false, name = "post_title", length = 255)
     private String postTitle;
@@ -43,7 +38,7 @@ public class Posts {
 
     }
 
-    public Posts(Long id, Long userId, BigInteger likes, String postTitle, String postPicture, Text content, DateTime createdAt){
+    public Posts(Long id, Long userId, int likes, String postTitle, String postPicture, String content, Date createdAt){
         this.id = id;
         this.userId = userId;
         this.likes = likes;
@@ -53,17 +48,16 @@ public class Posts {
         this.createdAt = createdAt;
     }
     
-@ManyToOne
-@JoinColumn(name = "user_id",
- nullable = false,
- foreignKey = @ForeignKey(name = "user_id"))
- private Users user;
+    @ManyToOne
+    @JoinColumn(name = "user_id",
+    nullable = false,
+    foreignKey = @ForeignKey(name = "user_id"))
+    private Users user;
 
     // getters and setters
 
     public Long getId() {
         return this.id;
-
     }
 
     public void setId(Long id) {
@@ -78,11 +72,11 @@ public class Posts {
         this.userId = userId;
     }
 
-    public BigInteger getLikes() {
+    public int getLikes() {
         return this.likes;
     }
 
-    public void setLikes(BigInteger likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
 
@@ -102,20 +96,19 @@ public class Posts {
         this.postPicture = postPicture;
     }
 
-    public Text getContent() {
+    public String getContent() {
         return this.content;
-
     }
 
-    public void setContent(Text content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public DateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }

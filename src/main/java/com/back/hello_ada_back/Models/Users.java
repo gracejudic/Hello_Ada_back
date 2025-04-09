@@ -1,27 +1,22 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
+package com.back.hello_ada_back.Models;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-
 @Table(name = "users")
 
 public class Users {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
+    @Column(nullable = false, name = "username", length = 25)
     private String username;
 
-    @Column(nullable =true, name = "profile_picture", length = 500)
+    @Column(nullable = true, name = "profile_picture", length = 500)
     private String profilPicture;
 
     @Column(nullable = true, name = "description", length = 255)
@@ -34,21 +29,20 @@ public class Users {
     private String password;
   
     
-@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-private List<Posts> posts;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Posts> posts;
 
-public Users(){
+    public Users() {
+    }
 
-}
-
-public Users(Long id, String username, String profilPicture, String description, String email, String password){
-this.id = id;
-this.username = username;
-this.profilPicture = profilPicture;
-this.description = description;
-this.email = email;
-this.password = password;
-}
+    public Users(Long id, String username, String profilPicture, String description, String email, String password) {
+    this.id = id;
+    this.username = username;
+    this.profilPicture = profilPicture;
+    this.description = description;
+    this.email = email;
+    this.password = password;
+    }
 
     // getters and setters
 
@@ -91,5 +85,13 @@ this.password = password;
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getPassword() {
+        return this.password;
+    }
 
-   
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+}
