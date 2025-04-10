@@ -16,21 +16,6 @@ public class PostsService {
     @Autowired
     private PostsRepository postsRepository;
     
-    @Autowired
-    private UsersService usersService;
-
-    public Posts createExamplePost() {
-        Users user = usersService.findById(1L);
-        
-        Posts post = new Posts();
-        post.setPostTitle("Mon premier post");
-        post.setContent("Contenu du post");
-        post.setPostPicture("image.jpg");
-        post.setLikes(BigInteger.ZERO);
-        post.setUser(user);
-        
-        return postsRepository.save(post);
-    }
 
     public List<Posts> findAll() {
         return postsRepository.findAll();
@@ -71,7 +56,7 @@ public class PostsService {
             post.setUser(user);
             postsService.createPost(post);
 
-            postsService.createExamplePost();
+            
         };
     }
 }
