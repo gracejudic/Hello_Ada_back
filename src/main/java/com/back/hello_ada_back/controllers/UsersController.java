@@ -1,7 +1,11 @@
 package com.back.hello_ada_back.controllers;
 
+import com.back.hello_ada_back.Models.Posts;
 import com.back.hello_ada_back.Models.Users;
 import com.back.hello_ada_back.services.UsersService;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -18,7 +23,8 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @PostMapping
+
+    @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
     public Users createUser(@Valid @RequestBody Users user) {
         try {
@@ -39,5 +45,21 @@ public class UsersController {
     @GetMapping("/{id}")
     public Users getUser(@PathVariable Long id) {
         return usersService.findById(id);
+    }
+
+    @GetMapping
+    public List<Users> findAll() {
+        return usersService.findAll();
+    }
+    
+
+    // @DeleteMapping("/{id}")
+    // public void deleteUser(@PathVariable Long id) {
+    //     usersService.deleteUser(id);
+    // }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        usersService.deleteUser(id);
     }
 } 

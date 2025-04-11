@@ -38,25 +38,25 @@ public class PostsService {
         return postsRepository.save(post);
     }
 
-    @Bean
-    CommandLineRunner initDatabase(UsersService usersService, PostsService postsService) {
-        return args -> {
-            // Créer un utilisateur de test
-            Users user = new Users();
-            user.setUsername("Ada");
-            user.setEmail("ada@example.com");
-            user.setPassword("password10");
-            usersService.createUser(user);
+//     @Bean
+//     CommandLineRunner initDatabase(UsersService usersService, PostsService postsService) {
+//         return args -> {
+//             // Créer un utilisateur de test
+//             Users user = new Users();
+//             user.setUsername("Ada");
+//             user.setEmail("ada@example.com");
+//             user.setPassword("password10");
+//             usersService.createUser(user);
 
-            // Créer un post de test
-            Posts post = new Posts();
-            post.setPostTitle("Journée raclette avec la promo fatoumata ");
-            post.setContent("La journée raclette avec la promo fatoumata a été un succès !");
-            post.setLikes(BigInteger.ZERO);
-            post.setUser(user);
-            postsService.createPost(post);
+//             // Créer un post de test
+//             Posts post = new Posts();
+//             post.setPostTitle("Journée raclette avec la promo fatoumata ");
+//             post.setContent("La journée raclette avec la promo fatoumata a été un succès !");
+//             post.setLikes(BigInteger.ZERO);
+//             post.setUser(user);
+//             postsService.createPost(post);
 
             
-        };
-    }
+//         };
+//     }
 }

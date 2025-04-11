@@ -45,9 +45,7 @@ public class Posts {
 
     public Posts() {}
 
-    public Posts(Long id, Users user, BigInteger likes, String postTitle, 
-                String postPicture, String content, LocalDateTime createdAt) {
-        this.id = id;
+    public Posts(Users user, BigInteger likes, String postTitle, String postPicture, String content, LocalDateTime createdAt) {
         this.user = user;
         this.likes = likes;
         this.postTitle = postTitle;

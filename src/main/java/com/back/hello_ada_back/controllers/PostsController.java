@@ -22,7 +22,7 @@ public class PostsController {
         return postsService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/createPost")
     public Posts createPost(@RequestBody Posts post) {
         return postsService.createPost(post);
     }
